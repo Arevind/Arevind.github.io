@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Arevind, an AI systems builder crafting practical tools with a playful maker streak.">
+  <title>rvnd | AI Systems Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Mono:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="site-mark" href="#top" aria-label="Back to top">$ rvnd</a>
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#work">Work</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle color theme">
+          <span class="theme-toggle-label">theme</span>
+          <span class="theme-toggle-value" id="theme-toggle-value">dark</span>
+        </button>
+      </div>
+      <div class="terminal-progress" aria-label="Scroll progress">
+        <span class="terminal-progress-label">progress</span>
+        <span class="terminal-progress-track">
+          <span class="terminal-progress-bar" id="terminal-progress-bar">[------------------------------]</span>
+        </span>
+        <span class="terminal-progress-value" id="terminal-progress-value">0%</span>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell" data-pane="session://rvnd">
+        <div class="hero-copy">
+          <p class="eyebrow reveal" id="hero-kicker"></p>
+          <p class="hero-identity reveal" id="hero-identity"></p>
+          <h1 class="hero-title reveal">
+            Calm systems.
+            <span>Sharp tools.</span>
+            Zero fluff.
+          </h1>
+          <p class="hero-summary reveal" id="hero-summary"></p>
+          <div class="hero-actions reveal">
+            <a class="button button-primary" href="#work">See selected work</a>
+            <a class="button button-secondary" href="#contact">Open contact details</a>
+          </div>
+        </div>
+
+        <aside class="hero-rail reveal" aria-label="Profile snapshot">
+          <div class="terminal-avatar hero-avatar" aria-label="Animated terminal avatar">
+            <div class="terminal-avatar-frame">
+              <p class="terminal-avatar-label">avatar.sys</p>
+              <div class="terminal-avatar-stage">
+                <div
+                  class="terminal-avatar-sprite"
+                  id="terminal-avatar-art"
+                  aria-label="Pixel sprite developer avatar"
+                >
+                  <img
+                    class="terminal-avatar-strip"
+                    src="assets/avatar-sprite-4frame-transparent-v2.png"
+                    alt=""
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-panel">
+          <p class="panel-label">Live context</p>
+          <div class="live-context-grid">
+            <div class="live-context-item">
+              <span class="live-context-key">name</span>
+              <span class="live-context-value">Arevind Mohan</span>
+            </div>
+            <div class="live-context-item">
+              <span class="live-context-key">role</span>
+              <span class="live-context-value">AI Systems Builder</span>
+            </div>
+            <div class="live-context-item">
+              <span class="live-context-key">strengths</span>
+              <div class="hero-tags" id="hero-tags"></div>
+            </div>
+          </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section-shell section-grid" id="about" data-parallax data-pane="about.log">
+        <div class="section-intro">
+          <p class="section-label">About</p>
+          <h2>A bit about me.</h2>
+        </div>
+        <div class="section-body">
+          <p class="lead" id="about-copy"></p>
+          <div class="meta-grid" id="meta-grid"></div>
+        </div>
+      </section>
+
+      <section class="section-shell section-grid" id="skills" data-parallax data-pane="skills.env">
+        <div class="section-intro">
+          <p class="section-label">Skills</p>
+          <h2>Things I work with a lot.</h2>
+        </div>
+        <div class="skills-layout" id="skills-grid"></div>
+      </section>
+
+      <section class="section-shell work-section" id="work" data-parallax data-pane="projects.index">
+        <div class="section-grid">
+          <div class="section-intro">
+            <p class="section-label">Featured Work</p>
+            <h2>Projects I have been building.</h2>
+          </div>
+          <div class="section-body">
+            <p class="support-copy">
+              Most of my work leans toward applied AI, retrieval, local-first assistants, and interfaces built to be genuinely useful.
+            </p>
+            <div class="work-signal-grid">
+              <div class="work-signal">
+                <p class="work-signal-label">Focus</p>
+                <p class="work-signal-value">Applied AI systems with product discipline</p>
+              </div>
+              <div class="work-signal">
+                <p class="work-signal-label">Pattern</p>
+                <p class="work-signal-value">Retrieval, offline assistants, and useful interfaces</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="featured-projects" id="featured-projects"></div>
+      </section>
+
+      <section class="section-shell closing-section" id="contact" data-pane="contact.cfg">
+        <div class="closing-copy">
+          <p class="section-label">Contact</p>
+          <h2>Let&apos;s connect.</h2>
+        </div>
+
+        <div class="contact-grid" id="contact-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
