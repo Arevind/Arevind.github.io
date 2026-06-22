@@ -1,0 +1,319 @@
+:root {
+  --bg: #09110f;
+  --surface: rgba(10, 18, 16, 0.86);
+  --surface-strong: rgba(13, 22, 20, 0.95);
+  --surface-soft: rgba(10, 18, 16, 0.7);
+  --line: rgba(140, 184, 164, 0.18);
+  --line-strong: rgba(140, 184, 164, 0.34);
+  --text: #e4f0ea;
+  --muted: #95aca3;
+  --accent: #89f0be;
+  --accent-warm: #ffc26d;
+  --shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+  --font-body: "Manrope", sans-serif;
+  --font-ui: "Share Tech Mono", "Space Mono", monospace;
+  --font-display: "Space Mono", "Share Tech Mono", monospace;
+  --ease: 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body[data-theme="light"] {
+  --bg: #f4efe6;
+  --surface: rgba(255, 251, 244, 0.88);
+  --surface-strong: rgba(255, 252, 246, 0.96);
+  --surface-soft: rgba(255, 249, 240, 0.74);
+  --line: rgba(50, 52, 47, 0.16);
+  --line-strong: rgba(50, 52, 47, 0.28);
+  --text: #101412;
+  --muted: #536058;
+  --accent: #0f9b63;
+  --accent-warm: #b6681f;
+  --shadow: 0 24px 60px rgba(32, 27, 20, 0.08);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: var(--font-body);
+  background:
+    radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 22%),
+    radial-gradient(circle at 82% 10%, color-mix(in srgb, var(--accent-warm) 10%, transparent), transparent 18%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 82%, black) 0%, var(--bg) 100%);
+}
+
+.lab-shell {
+  width: min(calc(100% - 2rem), 1120px);
+  margin: 0 auto;
+  padding: 1rem 0 3rem;
+}
+
+.lab-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.3rem 0 1rem;
+}
+
+.lab-mark,
+.lab-action,
+.lab-chip,
+.lab-theme-toggle {
+  font-family: var(--font-ui);
+}
+
+.lab-mark {
+  text-decoration: none;
+  color: var(--accent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.55rem 0.95rem;
+  background: var(--surface);
+}
+
+.lab-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.lab-header-label {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+}
+
+.lab-theme-toggle {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  gap: 0.55rem;
+}
+
+.lab-main {
+  display: grid;
+  gap: 1rem;
+}
+
+.lab-window {
+  position: relative;
+  padding: 3.5rem 1.2rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 1.1rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.02), transparent 18%),
+    var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.lab-window::before {
+  content: attr(data-pane);
+  position: absolute;
+  left: 1.1rem;
+  top: 1rem;
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: 0.76rem;
+}
+
+.lab-window::after {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  right: 1.1rem;
+  width: 3rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 0.3rem 0.3rem, #ff8e70 0.22rem, transparent 0.24rem),
+    radial-gradient(circle at 1.5rem 0.3rem, var(--accent-warm) 0.22rem, transparent 0.24rem),
+    radial-gradient(circle at 2.7rem 0.3rem, var(--accent) 0.22rem, transparent 0.24rem);
+}
+
+.lab-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.9fr);
+  gap: 1.5rem;
+  align-items: end;
+}
+
+.lab-kicker {
+  margin: 0 0 0.8rem;
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+}
+
+.lab-hero h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+}
+
+.lab-hero p {
+  max-width: 34rem;
+}
+
+.lab-terminal-readout,
+.lab-output,
+.lab-pet,
+.lab-snake {
+  border: 1px solid var(--line);
+  border-radius: 0.95rem;
+  background: var(--surface-strong);
+  padding: 1rem;
+  font-family: var(--font-ui);
+}
+
+.lab-terminal-readout p,
+.lab-output,
+.lab-pet-status {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+
+.lab-terminal-readout span {
+  color: var(--accent-warm);
+}
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.lab-window-wide {
+  grid-column: 1 / -1;
+}
+
+.lab-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.lab-card-head h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-family: var(--font-display);
+}
+
+.lab-card-meta {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+}
+
+.lab-action-row,
+.lab-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.lab-action,
+.lab-chip {
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+}
+
+.lab-action:hover,
+.lab-chip:hover,
+.lab-theme-toggle:hover,
+.lab-mark:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.lab-pet {
+  margin: 0;
+  min-height: 7rem;
+  display: grid;
+  place-items: center;
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  text-align: center;
+  white-space: pre;
+}
+
+.lab-snake {
+  margin: 0;
+  min-height: 13rem;
+  width: 100%;
+  padding: 1.1rem 1.15rem;
+  display: grid;
+  gap: 0.12rem;
+  font-size: clamp(0.78rem, 1.35vw, 1rem);
+  line-height: 1;
+  overflow: hidden;
+}
+
+.lab-snake-row {
+  display: grid;
+  grid-template-columns: repeat(var(--snake-cols, 20), minmax(0, 1fr));
+  align-items: center;
+}
+
+.lab-snake-cell {
+  display: grid;
+  place-items: center;
+  min-height: 1.05em;
+  color: color-mix(in srgb, var(--text) 90%, transparent);
+  text-shadow: 0 0 0 transparent;
+}
+
+.lab-snake-cell.is-head {
+  color: var(--accent);
+  text-shadow:
+    0 0 0.35rem color-mix(in srgb, var(--accent) 78%, transparent),
+    0 0 0.9rem color-mix(in srgb, var(--accent) 46%, transparent),
+    0 0 1.5rem color-mix(in srgb, var(--accent) 26%, transparent);
+}
+
+.lab-snake-cell.is-body {
+  color: color-mix(in srgb, var(--accent) 85%, var(--text) 15%);
+}
+
+.lab-snake-cell.is-food {
+  color: var(--accent-warm);
+  text-shadow: 0 0 0.75rem color-mix(in srgb, var(--accent-warm) 40%, transparent);
+}
+
+.lab-snake-cell.is-border {
+  color: var(--muted);
+}
+
+.lab-pet-status {
+  color: var(--muted);
+  margin: 0.8rem 0;
+}
+
+.lab-output-large {
+  min-height: 11rem;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 900px) {
+  .lab-hero,
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+}

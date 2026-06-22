@@ -18,24 +18,24 @@ const siteData = {
   },
   skills: [
     {
-      title: "AI Systems",
-      items: ["RAG", "LLMs", "vLLM", "llama.cpp", "embeddings", "reranking", "vector databases", "LangChain", "LangGraph"]
+      title: "AI / LLM Systems",
+      items: ["RAG", "LLMs", "Ollama", "offline LLMs", "LangChain", "LangGraph", "CrewAI", "prompt engineering", "guardrails"]
     },
     {
-      title: "Backend",
-      items: ["Python", "FastAPI", "Flask", "REST APIs"]
+      title: "Retrieval & Search",
+      items: ["Qdrant", "ChromaDB", "embeddings", "semantic search", "document retrieval", "knowledge base prep", "chunking", "metadata pipelines"]
     },
     {
-      title: "Infrastructure",
-      items: ["Docker", "Redis", "Kafka", "AWS/Linux"]
+      title: "Backend & APIs",
+      items: ["Python", "FastAPI", "Flask", "REST APIs", "backend automation", "IMAP/SMTP workflows"]
     },
     {
-      title: "Databases",
-      items: ["Qdrant", "ChromaDB", "PostgreSQL"]
+      title: "Data & Ingestion",
+      items: ["PDF/Text processing", "web scraping", "structured data extraction", "Pandas", "NumPy", "document parsing"]
     },
     {
-      title: "Frontend",
-      items: ["Next.js", "React", "Tailwind"]
+      title: "Infra & Product Stack",
+      items: ["Docker", "Redis", "Kafka", "Git", "GitHub", "Next.js", "React", "HTML/CSS"]
     }
   ],
   featuredProjects: [
@@ -108,6 +108,44 @@ const siteData = {
 };
 
 const themeStorageKey = "rvnd-theme";
+const terminalMiniMessages = [
+  "uptime: curious and caffeinated",
+  "favorite command: rg",
+  "shell: terminal-first, gui-optional",
+  "mood: shipping quietly",
+  "side quest: making tools less annoying"
+];
+const secretTerminalNavigation = {
+  lab: "lab.html",
+  "cd /lab": "lab.html",
+  "./sidequest": "lab.html"
+};
+const secretTerminalCommands = {
+  sudo: [
+    "$ sudo make it awesome",
+    "[sudo] password for rvnd: ********",
+    "permission denied: already in progress",
+    "hint: try neofetch"
+  ],
+  neofetch: [
+    "rvnd@portfolio",
+    "------------------------------",
+    "role: Associate Python dev - AI/ML",
+    "base: Trivandrum, Kerala",
+    "focus: rag, backend, offline ai",
+    "bonus: terminal chaos in moderation"
+  ],
+  "cat /dev/portfolio": [
+    "$ cat /dev/portfolio",
+    "output: practical ai systems, clean backend work, and a few fun edges",
+    "status: readable by humans"
+  ],
+  lab: [
+    "$ lab",
+    "side quest located",
+    "hint: try cd /lab"
+  ]
+};
 
 function setText(id, value) {
   const element = document.getElementById(id);
@@ -154,8 +192,13 @@ function renderSkills() {
 
     const header = createTag("div", "skill-group-header");
     header.append(createTag("h3", "skill-group-title", group.title));
-    const value = createTag("p", "skill-line", group.items.join(", "));
-    article.append(header, value);
+
+    const stack = createTag("div", "skill-chip-list");
+    group.items.forEach((item) => {
+      stack.append(createTag("span", "skill-chip", item));
+    });
+
+    article.append(header, stack);
     container.append(article);
   });
 }
@@ -235,6 +278,154 @@ function populateContent() {
   renderSkills();
   renderFeaturedProjects();
   renderContact();
+}
+
+function setupTerminalMiniFeed() {
+  const element = document.getElementById("terminal-mini-value");
+  if (!element) {
+    return;
+  }
+
+  let index = 0;
+  element.textContent = terminalMiniMessages[index];
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  window.setInterval(() => {
+    index = (index + 1) % terminalMiniMessages.length;
+    element.classList.remove("is-live");
+    window.setTimeout(() => {
+      element.textContent = terminalMiniMessages[index];
+      element.classList.add("is-live");
+    }, 90);
+  }, 3200);
+}
+
+function setupSiteMarkPrompt() {
+  const siteMark = document.querySelector(".site-mark");
+  if (!(siteMark instanceof HTMLElement)) {
+    return;
+  }
+
+  const prompts = ["$ rvnd", "$ whoami", "$ pwd", "$ ./portfolio --help"];
+  let index = 0;
+
+  siteMark.addEventListener("click", () => {
+    index = (index + 1) % prompts.length;
+    siteMark.textContent = prompts[index];
+  });
+}
+
+function setupSecretTerminal() {
+  const overlay = document.getElementById("secret-terminal");
+  const body = document.getElementById("secret-terminal-body");
+  const closeButton = document.getElementById("secret-terminal-close");
+  if (!(overlay instanceof HTMLElement) || !(body instanceof HTMLElement) || !(closeButton instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  let buffer = "";
+  let resetTimer;
+  let loadTimer;
+
+  function closeTerminal() {
+    window.clearTimeout(loadTimer);
+    overlay.classList.remove("is-open");
+    overlay.setAttribute("aria-hidden", "true");
+  }
+
+  function openTerminal(command) {
+    const lines = secretTerminalCommands[command];
+    if (!lines) {
+      return;
+    }
+
+    body.innerHTML = "";
+    lines.forEach((line) => {
+      body.append(createTag("p", "secret-terminal-line", line));
+    });
+    overlay.classList.add("is-open");
+    overlay.setAttribute("aria-hidden", "false");
+  }
+
+  function renderTerminalLines(lines, stepMs = 180) {
+    body.innerHTML = "";
+    lines.forEach((line, index) => {
+      const row = createTag("p", "secret-terminal-line", line.text);
+      row.style.opacity = "0";
+      if (line.tone) {
+        row.classList.add(`secret-terminal-line-${line.tone}`);
+      }
+      body.append(row);
+      window.setTimeout(() => {
+        row.style.opacity = "1";
+      }, stepMs * index);
+    });
+  }
+
+  function launchLab(href, command) {
+    const funnyScripts = [
+      { text: `$ ${command}` },
+      { text: "[info] mounting /lab", tone: "ok" },
+      { text: "[warn] snake.bin requested keyboard privileges", tone: "warn" },
+      { text: "[danger] ascii pet escaped sandbox for 0.4 seconds", tone: "danger" },
+      { text: "[info] chmod +x fun.sh", tone: "ok" },
+      { text: "[warn] sl locomotive warming up in background", tone: "warn" },
+      { text: "[danger] cowsay detected excessive confidence levels", tone: "danger" },
+      { text: "[info] starting fortune.sys", tone: "ok" },
+      { text: "[info] waking autonomous pet.proc", tone: "ok" },
+      { text: "[warn] harmless terminal chaos buffer at 97%", tone: "warn" },
+      { text: "launching /lab ...", tone: "ok" }
+    ];
+
+    renderTerminalLines(funnyScripts, 260);
+
+    overlay.classList.add("is-open");
+    overlay.setAttribute("aria-hidden", "false");
+    loadTimer = window.setTimeout(() => {
+      window.location.href = href;
+    }, 3600);
+  }
+
+  window.addEventListener("keydown", (event) => {
+    if (overlay.classList.contains("is-open") && event.key === "Escape") {
+      closeTerminal();
+      return;
+    }
+
+    if (event.ctrlKey || event.metaKey || event.altKey || event.key.length !== 1) {
+      return;
+    }
+
+    buffer = `${buffer}${event.key.toLowerCase()}`.slice(-24);
+    window.clearTimeout(resetTimer);
+    resetTimer = window.setTimeout(() => {
+      buffer = "";
+    }, 4200);
+
+    Object.entries(secretTerminalNavigation).forEach(([command, href]) => {
+      if (buffer.endsWith(command)) {
+        launchLab(href, command);
+        buffer = "";
+      }
+    });
+
+    Object.keys(secretTerminalCommands).forEach((command) => {
+      if (buffer.endsWith(command)) {
+        openTerminal(command);
+        buffer = "";
+      }
+    });
+  });
+
+  closeButton.addEventListener("click", closeTerminal);
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) {
+      closeTerminal();
+    }
+  });
 }
 
 function getPreferredTheme() {
@@ -360,6 +551,9 @@ function updateParallax() {
 
 populateContent();
 setupThemeToggle();
+setupTerminalMiniFeed();
+setupSiteMarkPrompt();
+setupSecretTerminal();
 setupAvatarSprite();
 revealHero();
 updateParallax();

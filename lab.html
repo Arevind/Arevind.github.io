@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A playful terminal lab hidden inside Arevind Mohan's portfolio.">
+  <title>rvnd | Terminal Lab</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="assets/favicon-avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Mono:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="lab.css">
+</head>
+<body>
+  <div class="lab-shell">
+    <header class="lab-header">
+      <a class="lab-mark" href="index.html">$ cd ..</a>
+      <div class="lab-header-actions">
+        <p class="lab-header-label">terminal lab // unnecessary but delightful</p>
+        <button class="lab-theme-toggle" id="lab-theme-toggle" type="button" aria-label="Toggle color theme">
+          <span>theme</span>
+          <span id="lab-theme-value">dark</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="lab-main">
+      <section class="lab-hero lab-window" data-pane="lab://boot">
+        <div class="lab-copy">
+          <p class="lab-kicker">side quest unlocked</p>
+          <h1>Terminal playground for curious people.</h1>
+        </div>
+        <div class="lab-terminal-readout">
+          <p>> lab status: online</p>
+          <p>> current user: rvnd</p>
+          <p>> side quest mood: harmless chaos</p>
+          <p>> recommended action: <span>press start on snake</span></p>
+        </div>
+      </section>
+
+      <section class="lab-grid">
+        <article class="lab-window" data-pane="fortune.sys">
+          <div class="lab-card-head">
+            <h2>fortune</h2>
+            <button class="lab-action" id="fortune-button" type="button">run</button>
+          </div>
+          <div class="lab-output" id="fortune-output">$ waiting for fortune...</div>
+        </article>
+
+        <article class="lab-window" data-pane="pet.proc">
+          <div class="lab-card-head">
+            <h2>ascii pet</h2>
+            <p class="lab-card-meta">autonomous process</p>
+          </div>
+          <pre class="lab-pet" id="lab-pet">(=^..^=)</pre>
+          <p class="lab-pet-status" id="lab-pet-status">status // calm</p>
+          <div class="lab-action-row">
+            <button class="lab-action" data-pet-action="feed" type="button">feed</button>
+            <button class="lab-action" data-pet-action="compile" type="button">compile</button>
+            <button class="lab-action" data-pet-action="sleep" type="button">sleep</button>
+          </div>
+        </article>
+
+        <article class="lab-window" data-pane="snake.bin">
+          <div class="lab-card-head">
+            <h2>terminal snake</h2>
+            <div class="lab-action-row">
+              <button class="lab-action" id="snake-start" type="button">start</button>
+              <button class="lab-action" id="snake-reset" type="button">reset</button>
+            </div>
+          </div>
+          <pre class="lab-snake" id="lab-snake-board"></pre>
+          <p class="lab-pet-status" id="lab-snake-status">status // press start, then use arrow keys</p>
+        </article>
+
+        <article class="lab-window" data-pane="commands.log">
+          <div class="lab-card-head">
+            <h2>command deck</h2>
+            <div class="lab-chip-row">
+              <button class="lab-chip" data-command="cd-home" type="button">cd ..</button>
+              <button class="lab-chip" data-command="neofetch" type="button">neofetch</button>
+              <button class="lab-chip" data-command="htop" type="button">htop</button>
+              <button class="lab-chip" data-command="sl" type="button">sl</button>
+              <button class="lab-chip" data-command="cowsay" type="button">cowsay</button>
+            </div>
+          </div>
+          <div class="lab-output lab-output-large" id="command-output">$ pick a command to fake-run...</div>
+        </article>
+
+        <article class="lab-window lab-window-wide" data-pane="orbit.log">
+          <div class="lab-card-head">
+            <h2>background noise</h2>
+            <p class="lab-card-meta">self-updating</p>
+          </div>
+          <div class="lab-output lab-output-large" id="lab-log-stream">$ waiting for background noise...</div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="lab.js"></script>
+</body>
+</html>

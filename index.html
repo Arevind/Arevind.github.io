@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio of Arevind Mohan, an Associate Python Developer focused on AI/ML systems, backend tooling, and practical products.">
   <title>rvnd | Associate Python Dev - AI/ML</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="assets/favicon-avatar.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Mono:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -50,6 +52,14 @@
             <a class="button button-accent" href="resume/Arevind_Mohan-Resume.pdf" target="_blank" rel="noreferrer">Download Resume</a>
             <a class="button button-secondary" href="#contact">Open contact details</a>
           </div>
+          <div class="terminal-mini-feed reveal" aria-label="Terminal status feed">
+            <span class="terminal-mini-label">status //</span>
+            <span class="terminal-mini-value" id="terminal-mini-value">booting small fun bits...</span>
+          </div>
+          <div class="terminal-sidequest reveal" aria-label="Hidden terminal side quest">
+            <span class="terminal-sidequest-prompt">$</span>
+            <a class="terminal-sidequest-link" href="lab.html">cd /lab</a>
+          </div>
         </div>
 
         <aside class="hero-rail reveal" aria-label="Profile snapshot">
@@ -93,7 +103,6 @@
 
       <section class="section-shell section-grid" id="about" data-parallax data-pane="about.log">
         <div class="section-intro">
-          <p class="section-label">About</p>
           <h2>A bit about me.</h2>
         </div>
         <div class="section-body">
@@ -104,8 +113,7 @@
 
       <section class="section-shell section-grid" id="skills" data-parallax data-pane="skills.env">
         <div class="section-intro">
-          <p class="section-label">Skills</p>
-          <h2>Core stack and tools.</h2>
+          <h2>What I work with often.</h2>
         </div>
         <div class="skills-layout" id="skills-grid"></div>
       </section>
@@ -113,7 +121,6 @@
       <section class="section-shell work-section" id="work" data-parallax data-pane="projects.index">
         <div class="section-grid">
           <div class="section-intro">
-            <p class="section-label">Featured Work</p>
             <h2>Projects I have been building.</h2>
           </div>
           <div class="section-body">
@@ -138,13 +145,22 @@
 
       <section class="section-shell closing-section" id="contact" data-pane="contact.cfg">
         <div class="closing-copy">
-          <p class="section-label">Contact</p>
           <h2>Let&apos;s connect.</h2>
         </div>
 
         <div class="contact-grid" id="contact-grid"></div>
       </section>
     </main>
+  </div>
+
+  <div class="secret-terminal" id="secret-terminal" aria-hidden="true">
+    <div class="secret-terminal-window" role="dialog" aria-modal="true" aria-labelledby="secret-terminal-title">
+      <div class="secret-terminal-head">
+        <p class="secret-terminal-title" id="secret-terminal-title">secret.sys</p>
+        <button class="secret-terminal-close" id="secret-terminal-close" type="button" aria-label="Close secret terminal">exit</button>
+      </div>
+      <div class="secret-terminal-body" id="secret-terminal-body"></div>
+    </div>
   </div>
 
   <script src="script.js"></script>
