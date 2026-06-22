@@ -2,13 +2,13 @@ const siteData = {
   profile: {
     name: "Arevind Mohan",
     shortName: "rvnd",
-    role: "AI Systems Builder",
+    role: "Associate Python Dev - AI/ML",
     kicker: "boot log // applied ai, retrieval, voice, backend product work",
     heroSummary:
       "I build retrieval systems, offline assistants, and backend-heavy tools that turn technical depth into something people can actually use.",
     about:
       "I enjoy building systems that hold up under real constraints: local-first where it helps, clear in how they behave, and polished enough to feel good to use. Most of my work sits around applied AI, backend engineering, voice interaction, and practical tooling.",
-    tags: ["RAG Systems", "Offline AI", "Voice UX", "Product Thinking"],
+    tags: ["RAG systems", "backend engineering", "offline AI", "voice-first tools"],
     meta: [
       { label: "Base", value: "Trivandrum, Kerala" },
       { label: "Availability", value: "Working full-time. Open to interesting opportunities and collaborations." },
@@ -18,20 +18,24 @@ const siteData = {
   },
   skills: [
     {
-      title: "AI / LLM Systems",
-      items: ["RAG pipelines", "Embeddings", "Vector search", "Hybrid retrieval", "Evaluation workflows", "Local LLM tooling"]
+      title: "AI Systems",
+      items: ["RAG", "embeddings", "vector databases", "LangChain", "LangGraph"]
     },
     {
-      title: "Backend & APIs",
-      items: ["Python", "FastAPI", "Service design", "Async workflows", "Data processing", "Diagnostics"]
+      title: "Backend",
+      items: ["Python", "FastAPI", "Flask", "REST APIs"]
     },
     {
-      title: "Frontend & Product",
-      items: ["Next.js", "Dashboards", "Developer UX", "Interaction design", "Responsive UI", "Technical storytelling"]
+      title: "Infrastructure",
+      items: ["Docker", "Redis", "Kafka", "AWS/Linux"]
     },
     {
-      title: "Tools & Infra",
-      items: ["Docker", "SQLite", "Qdrant", "Ollama", "GitHub", "Local-first workflows"]
+      title: "Databases",
+      items: ["Qdrant", "ChromaDB", "PostgreSQL"]
+    },
+    {
+      title: "Frontend",
+      items: ["Next.js", "React", "Tailwind"]
     }
   ],
   featuredProjects: [
@@ -39,31 +43,40 @@ const siteData = {
       name: "vecseek",
       kicker: "Flagship build",
       href: "https://github.com/Arevind/vecseek",
-      summary:
-        "A self-hosted multi-workspace RAG platform for uploading documents, indexing them, and querying them through a clean UI or API.",
-      impact:
-        "Built with FastAPI, Qdrant, SQLite FTS, evaluation workflows, and a Next.js dashboard for managing documents, retrieval, and search results in one place.",
+      problem:
+        "Managing document search across different workspaces without relying on a hosted retrieval product.",
+      built:
+        "A self-hosted multi-workspace RAG platform with document upload, indexing, search, and a dashboard for running queries through UI or API.",
       stack: ["Python", "FastAPI", "Next.js", "Qdrant", "SQLite", "OpenAI / Ollama"]
+      ,
+      result:
+        "A single system for document retrieval, workspace separation, and search workflows that can run locally or self-hosted."
     },
     {
       name: "raven",
       kicker: "Local-first assistant",
       href: "https://github.com/Arevind/raven",
-      summary:
-        "A privacy-first offline voice assistant designed to run on CPU with local LLM inference, speech interaction, and function calling.",
-      impact:
-        "Built around local inference, speech input and output, and function calling so the assistant can run privately without depending on cloud-hosted models.",
+      problem:
+        "Most voice assistants depend on cloud services and break privacy or offline usability.",
+      built:
+        "An offline voice assistant built around local LLM inference, speech input and output, and function calling on CPU-friendly hardware.",
       stack: ["Python", "FastAPI", "Docker", "Speech", "Local LLMs", "Function calling"]
+      ,
+      result:
+        "A privacy-first assistant that can handle spoken interaction and local automation without sending data to external services."
     },
     {
       name: "ascii-cake",
       kicker: "Personality project",
       href: "https://github.com/Arevind/ascii-cake",
-      summary:
-        "A chaotic and joyful terminal birthday experience with ASCII art, fireworks, music, and staged interaction.",
-      impact:
-        "A playful CLI project that mixes animation, audio, and timed terminal interactions to turn a simple script into a full little experience.",
+      problem:
+        "A normal terminal script felt too flat for something meant to be fun and memorable.",
+      built:
+        "A terminal birthday experience with ASCII art, fireworks, music, and timed interaction sequences.",
       stack: ["Python", "Rich", "Pygame", "CLI design", "Animation"]
+      ,
+      result:
+        "A playful CLI project that turns the terminal into a small interactive event instead of a plain one-off script."
     }
   ],
   contact: [
@@ -138,14 +151,11 @@ function renderSkills() {
   const container = document.getElementById("skills-grid");
   siteData.skills.forEach((group) => {
     const article = createTag("article", "skill-group");
-    article.append(createTag("p", "section-label", group.title));
 
-    const list = createTag("ul", "skill-list");
-    group.items.forEach((item) => {
-      list.append(createTag("li", "", item));
-    });
-
-    article.append(list);
+    const header = createTag("div", "skill-group-header");
+    header.append(createTag("h3", "skill-group-title", group.title));
+    const value = createTag("p", "skill-line", group.items.join(", "));
+    article.append(header, value);
     container.append(article);
   });
 }
@@ -166,14 +176,20 @@ function renderFeaturedProjects() {
     link.rel = "noreferrer";
     titleRow.append(link);
     left.append(titleRow);
-    left.append(createTag("p", "project-copy", project.summary));
+    left.append(createTag("p", "project-detail-label", "Problem"));
+    left.append(createTag("p", "project-copy", project.problem));
 
     const right = createTag("div", "project-detail");
-    right.append(createTag("p", "project-impact", project.impact));
+    const builtLabel = createTag("p", "project-detail-label", "What I built");
+    const builtCopy = createTag("p", "project-impact", project.built);
+    const stackLabel = createTag("p", "project-detail-label", "Tech stack");
 
     const stack = createTag("div", "stack-list");
     project.stack.forEach((item) => stack.append(createTag("span", "", item)));
-    right.append(stack);
+    const resultLabel = createTag("p", "project-detail-label", "Result / impact");
+    const resultCopy = createTag("p", "project-impact", project.result);
+
+    right.append(builtLabel, builtCopy, stackLabel, stack, resultLabel, resultCopy);
 
     article.append(left, right);
     container.append(article);

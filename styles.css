@@ -382,8 +382,7 @@ main {
   animation: title-pulse 4.2s ease-in-out infinite;
 }
 
-.hero-title::after {
-  content: "_";
+.hero-title-caret {
   display: inline-block;
   margin-left: 0.14em;
   color: var(--caret-color);
@@ -563,6 +562,18 @@ main {
   color: var(--text);
 }
 
+.button-accent {
+  background: var(--accent-warm);
+  color: #14100a;
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent-warm) 16%, transparent);
+}
+
+.button-accent:hover,
+.button-accent:focus-visible {
+  background: color-mix(in srgb, var(--accent-warm) 86%, white);
+  box-shadow: 0 0 26px color-mix(in srgb, var(--accent-warm) 22%, transparent);
+}
+
 .button-secondary:hover,
 .button-secondary:focus-visible {
   border-color: var(--accent);
@@ -709,15 +720,74 @@ main {
 
 .skills-layout {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
 }
 
 .skill-group {
-  padding: 1.25rem;
+  position: relative;
+  padding: 1rem 1.1rem 1rem 1.35rem;
+  border: 1px solid color-mix(in srgb, var(--line) 92%, transparent);
+  border-radius: 0.95rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--accent) 2%, transparent), transparent 28%),
+    color-mix(in srgb, var(--surface-soft) 98%, transparent);
+  transition: border-color var(--ease), background-color var(--ease), box-shadow var(--ease), transform var(--ease);
+  overflow: hidden;
 }
 
-.skill-group h3,
+.skill-group::after {
+  content: "";
+  position: absolute;
+  left: 0.7rem;
+  top: 1rem;
+  bottom: 1rem;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent), transparent 88%);
+  opacity: 0.9;
+}
+
+.skill-group:hover,
+.skill-group:focus-within {
+  transform: translateX(4px);
+  border-color: color-mix(in srgb, var(--accent) 16%, var(--line));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--accent) 3%, transparent), transparent 28%),
+    color-mix(in srgb, var(--surface-soft) 100%, transparent);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+.skill-group-header {
+  margin-bottom: 0.35rem;
+  padding-left: 0.9rem;
+}
+
+.skill-group-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.skill-line {
+  margin: 0;
+  padding-left: 0.9rem;
+}
+
+.skill-line {
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+}
+
 .project-title,
 .contact-title {
   margin: 0;
@@ -727,14 +797,11 @@ main {
   letter-spacing: -0.03em;
 }
 
-.skill-list {
-  list-style: none;
-  margin: 1rem 0 0;
-  padding: 0;
-}
-
-.skill-list li {
-  min-width: 9.5rem;
+body[data-theme="light"] .skill-group:hover,
+body[data-theme="light"] .skill-group:focus-within {
+  box-shadow:
+    0 14px 30px rgba(70, 54, 34, 0.08),
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 4%, transparent);
 }
 
 .work-section {
@@ -805,6 +872,20 @@ main {
 .project-impact,
 .contact-text {
   margin: 0.75rem 0 0;
+}
+
+.project-detail-label {
+  margin: 0.95rem 0 0;
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-summary .project-detail-label {
+  margin-top: 0.85rem;
 }
 
 .project-link,
