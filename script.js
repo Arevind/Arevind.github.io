@@ -19,7 +19,7 @@ const siteData = {
   skills: [
     {
       title: "AI Systems",
-      items: ["RAG", "embeddings", "vector databases", "LangChain", "LangGraph"]
+      items: ["RAG", "LLMs", "vLLM", "llama.cpp", "embeddings", "reranking", "vector databases", "LangChain", "LangGraph"]
     },
     {
       title: "Backend",
@@ -73,7 +73,7 @@ const siteData = {
         "A normal terminal script felt too flat for something meant to be fun and memorable.",
       built:
         "A terminal birthday experience with ASCII art, fireworks, music, and timed interaction sequences.",
-      stack: ["Python", "Rich", "Pygame", "CLI design", "Animation"]
+      stack: ["Python", "Rich", "Pygame", "CLI design"]
       ,
       result:
         "A playful CLI project that turns the terminal into a small interactive event instead of a plain one-off script."
